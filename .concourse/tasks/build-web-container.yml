@@ -12,4 +12,4 @@ outputs:
 - name: web-docker-image
 
 run:
-  path: resource-personal_website/.concourse/tasks/build-web-container.sh
+  path: /bin/sh resource-personal_website/.concourse/tasks/build-web-container.sh
