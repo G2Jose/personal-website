@@ -4,6 +4,7 @@ jobs:
   serial: true
   plan:
   - get: resource-personal_website
+    trigger: true
   - put: web-docker-image
     params:
       build: resource-personal_website/web
