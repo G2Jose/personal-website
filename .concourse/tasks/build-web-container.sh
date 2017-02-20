@@ -38,8 +38,45 @@ sanitize_cgroups() {
     fi
   done
 }
-sanitize_cgroups
-dockerd&
+
+start_docker() {
+  mkdir -p /var/log
+  mkdir -p /var/run
+
+  sanitize_cgroups
+
+  # check for /proc/sys being mounted readonly, as systemd does
+  if grep '/proc/sys\s\+\w\+\s\+ro,' /proc/mounts >/dev/null; then
+    mount -o remount,rw /proc/sys
+  fi
+
+  local mtu=$(cat /sys/class/net/$(ip route get 8.8.8.8|awk '{ print $5 }')/mtu)
+  local server_args="--mtu ${mtu}"
+  local registry=""
+
+  for registry in $1; do
+    server_args="${server_args} --insecure-registry ${registry}"
+  done
+
+  if [ -n "$2" ]; then
+    server_args="${server_args} --registry-mirror=$2"
+  fi
+
+  docker daemon ${server_args} >/tmp/docker.log 2>&1 &
+  echo $! > /tmp/docker.pid
+
+  trap stop_docker EXIT
+
+  sleep 1
+
+  until docker info >/dev/null 2>&1; do
+    echo waiting for docker to come up...
+    sleep 1
+  done
+}
+
+start_docker
+# dockerd&
 sleep 2
 docker build -t web resource-personal_website/web/
 echo "done building docker container"
