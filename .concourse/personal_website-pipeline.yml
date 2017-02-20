@@ -1,0 +1,58 @@
+jobs:
+- name: web-publish
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal_website
+    trigger: true
+  - put: web-docker-image
+    params:
+      build: resource-personal_website/web
+- name: jupyter-publish
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal_website
+    trigger: true
+  - put: jupyter-docker-image
+    params:
+      build: resource-personal_website/jupyter
+- name: maps-publish
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal_website
+    trigger: true
+  - put: maps-docker-image
+    params:
+      build: resource-personal_website/maps
+
+resources:
+- name: resource-personal_website
+  type: git
+  source:
+    uri: https://github.com/G2Jose/personal_website.git
+
+- name: web-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-web}}
+
+- name: jupyter-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-jupyter}}
+
+- name: maps-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-jupyter}}
