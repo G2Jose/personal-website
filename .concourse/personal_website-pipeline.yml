@@ -6,8 +6,10 @@ jobs:
   - get: resource-personal_website
   - task: build-web-container
     file: resource-personal_website/.concourse/tasks/build-web-container.yml
+    privileged: true
   - task: load-web-container
     file: resource-personal_website/.concourse/tasks/load-web-container.yml
+    privileged: true
 
 resources:
 - name: resource-personal_website
