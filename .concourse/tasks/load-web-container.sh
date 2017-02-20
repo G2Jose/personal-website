@@ -1,3 +1,3 @@
-#/bin/sh
+#!/bin/sh
 
-ls
+ls web-docker-image/
