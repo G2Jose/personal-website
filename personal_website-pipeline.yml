@@ -9,6 +9,16 @@ jobs:
     params:
       build: resource-personal_website/web
 
+- name: jupyter-publish
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal_website
+    trigger: true
+  - put: jupyter-docker-image
+    params:
+      build: resource-personal_website/jupyter
+
 resources:
 - name: resource-personal_website
   type: git
@@ -21,4 +31,12 @@ resources:
     email: {{docker-hub-email}}
     username: {{docker-hub-username}}
     password: {{docker-hub-password}}
-    repository: {{docker-hub-image-hello-world}}
+    repository: {{docker-hub-image-web}}
+
+- name: jupyter-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-jupyter}}
