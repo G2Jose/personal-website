@@ -1,4 +1,4 @@
-FROM node:7.5.0
+FROM node:7.5.0-alpine
 
 COPY ./package.json /packages/package.json
 RUN cd /packages/ && npm install
