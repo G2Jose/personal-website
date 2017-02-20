@@ -1,25 +1,13 @@
-FROM alpine:latest
+FROM node:7.5.0
 
-RUN apk update && apk add \
-	nodejs
-
-RUN npm install -g \
-	pm2 \
-	yarn
-
-RUN mkdir /personal_website-packages
-
-COPY ./package.json /personal_website-packages/package.json
-RUN cd /personal_website-packages/ && yarn install
-
-COPY . /personal_website
-RUN rm -rf /personal_website/node_modules /personal_website/public
-RUN mv /personal_website-packages/node_modules /personal_website/
+COPY ./package.json /packages/package.json
+RUN cd /packages/ && npm install
 
 WORKDIR /personal_website
 
-# RUN npm run build
+RUN cp -a /packages/* /personal_website/
+COPY . /personal_website
 
-EXPOSE 8081
+EXPOSE 3000
 
-CMD ["pm2", "start", "--no-daemon", "bin/www"]
+CMD ["node_modules/.bin/http-server", "public", "-p 3000"]

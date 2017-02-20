@@ -1,0 +1,23 @@
+jobs:
+- name: web-publish
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal_website
+  - put: web-docker-image
+    params:
+      build: resource-personal_website/web
+
+resources:
+- name: resource-personal_website
+  type: git
+  source:
+    uri: https://github.com/G2Jose/personal_website.git
+
+- name: web-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-hello-world}}
