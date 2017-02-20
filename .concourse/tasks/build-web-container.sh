@@ -43,5 +43,6 @@ dockerd&
 sleep 2
 docker build -t web resource-personal_website/web/
 echo "done building docker container"
-ls web-docker-image/
+ls
+docker ps
 docker save web > web-docker-image/web.tar
