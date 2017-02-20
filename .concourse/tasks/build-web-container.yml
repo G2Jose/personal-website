@@ -13,4 +13,5 @@ outputs:
 
 run:
   # path: /bin/sh resource-personal_website/.concourse/tasks/build-web-container.sh
-  path: ls -lap
+  path: ls
+  args: [-lap]
