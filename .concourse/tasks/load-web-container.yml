@@ -7,7 +7,7 @@ image_resource:
 
 inputs:
 - name: web-docker-image
-- name: personal_website
+- name: resource-personal_website
 
 run:
-  path: personal_website/.concourse/tasks/load-web-container.sh
+  path: resource-personal_website/.concourse/tasks/load-web-container.sh
