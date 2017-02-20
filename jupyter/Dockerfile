@@ -1,6 +1,4 @@
-FROM continuumio/anaconda3
-
-RUN /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks"
+FROM georgejose/jupyter_base
 
 RUN mkdir -p /root/.jupyter/
 
