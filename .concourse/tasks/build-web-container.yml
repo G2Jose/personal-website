@@ -13,5 +13,3 @@ outputs:
 
 run:
   path: ./resource-personal_website/.concourse/tasks/build-web-container.sh
-  # path: ls
-  # args: ['-lap', './resource-personal_website/.concourse/tasks/']
