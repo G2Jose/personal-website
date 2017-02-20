@@ -1,0 +1,13 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: docker}
+
+inputs:
+- name: web-docker-image
+- name: personal_website
+
+run:
+  path: personal_website/.concourse/tasks/load-web-container.sh
