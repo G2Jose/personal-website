@@ -6,10 +6,10 @@ image_resource:
   source: {repository: docker}
 
 inputs:
-- name: personal_website/web
+- name: resource-personal_website/web
 
 outputs:
 - name: web-docker-image
 
 run:
-  path: personal_website/.concourse/tasks/build-web-container.sh
+  path: resource-personal_website/.concourse/tasks/build-web-container.sh

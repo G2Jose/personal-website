@@ -5,9 +5,9 @@ jobs:
   plan:
   - get: resource-personal_website
   - task: build-web-container
-    file: .concourse/tasks/build-web-container.yml
+    file: resource-personal_website/.concourse/tasks/build-web-container.yml
   - task: load-web-container
-    file: .concourse/tasks/load-web-container.yml
+    file: resource-personal_website/.concourse/tasks/load-web-container.yml
 
 resources:
 - name: resource-personal_website
