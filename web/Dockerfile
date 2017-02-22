@@ -8,6 +8,6 @@ WORKDIR /personal_website
 RUN cp -a /packages/* /personal_website/
 COPY . /personal_website
 
-EXPOSE 800
+EXPOSE 8080
 
-CMD ["node_modules/.bin/http-server", "public", "-p 800"]
+CMD ["node_modules/.bin/http-server", "public", "-p 8080"]
