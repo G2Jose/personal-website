@@ -8,6 +8,6 @@ WORKDIR /personal_website
 RUN cp -a /packages/* /personal_website/
 COPY . /personal_website
 
-EXPOSE 3000
+EXPOSE 800
 
-CMD ["node_modules/.bin/http-server", "public", "-p 3000"]
+CMD ["node_modules/.bin/http-server", "public", "-p 800"]
