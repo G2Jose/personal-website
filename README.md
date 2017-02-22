@@ -1,4 +1,7 @@
 # [http://georgejose.com](https://georgejose.com)
+
+[![build status](https://gitlab.com/G2Jose/personal_website/badges/master/build.svg)](https://gitlab.com/G2Jose/personal_website/commits/master)
+
 Source code for my personal website at www.georgejose.com. Please remove all private information if you wish to fork this. 
 
 ## How to use
