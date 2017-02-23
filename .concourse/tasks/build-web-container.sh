@@ -83,7 +83,7 @@ stop_docker() {
   kill -TERM $pid
   wait $pid
 }
-
+echo $ENV_VAR
 start_docker
 # dockerd&
 sleep 2

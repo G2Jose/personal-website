@@ -4,9 +4,9 @@ jobs:
   serial: true
   plan:
   - get: resource-personal-website
+    trigger: true
   - task: build-web-container
     file: resource-personal-website/.concourse/tasks/build-web-container.yml
-    trigger: true
     privileged: true
 # - name: load-web
 #   public: true
