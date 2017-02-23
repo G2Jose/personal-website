@@ -101,9 +101,9 @@ resources:
   type: git
   source:
     uri: https://github.com/G2Jose/personal-website.git
-    branch: concourse
+    branch: master
 - name: resource-haproxy
   type: git
   source:
     uri: https://github.com/G2Jose/haproxy.git
-    branch: concourse
+    branch: master
