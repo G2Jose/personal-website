@@ -84,5 +84,9 @@ stop_docker() {
   wait $pid
 }
 start_docker
-docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
+apk add --no-cache openssh-client
+eval $(ssh-agent -s)
+echo $DEPLOY_SSH_KEY > ssh_key.pem && chmod 400 ssh_key.pem && ssh-add ssh_key.pem && rm -rf ssh_key.pem
+ssh $SSH_HOST "docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD && docker pull $DOCKER_HUB_DEPLOY_TAG && docker run -p 80:8080 -dt $DOCKER_HUB_DEPLOY_TAG"
+# docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 echo "done deploying docker container"

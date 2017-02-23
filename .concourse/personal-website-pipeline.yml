@@ -44,6 +44,8 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
+      SSH_HOST: george@138.197.146.211
+      DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 
 resources:
 - name: resource-personal-website
