@@ -85,7 +85,7 @@ stop_docker() {
 }
 echo $DOCKER_HUB_EMAIL
 start_docker
-# dockerd&
+
 sleep 2
 docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 docker pull $DOCKER_HUB_TEST_TAG || :
