@@ -39,6 +39,11 @@ jobs:
   - task: deploy-web-container
     file: resource-personal-website/.concourse/tasks/deploy-web-container.yml
     privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
 
 resources:
 - name: resource-personal-website
