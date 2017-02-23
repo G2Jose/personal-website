@@ -13,9 +13,3 @@ outputs:
 
 run:
   path: ./resource-personal-website/.concourse/tasks/build-web-container.sh
-
-params:
-  # DOCKER_HUB_EMAIL:
-  DOCKER_HUB_USERNAME:
-  DOCKER_HUB_PASSWORD:
-  DOCKER_HUB_IMAGE:
