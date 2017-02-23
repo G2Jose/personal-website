@@ -8,8 +8,5 @@ image_resource:
 inputs:
 - name: resource-personal-website
 
-outputs:
-- name: web-docker-image
-
 run:
-  path: ./resource-personal-website/.concourse/tasks/build-web-container.sh
+  path: resource-personal-website/.concourse/tasks/test-web-container.sh

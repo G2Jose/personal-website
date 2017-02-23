@@ -1,7 +1,7 @@
 FROM node:7.5.0-alpine
 
 COPY ./package.json /packages/package.json
-RUN cd /packages/ && npm install
+RUN cd /packages/ && npm install -q
 
 WORKDIR /personal_website
 

@@ -1,0 +1,55 @@
+jobs:
+- name: build-web
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal-website
+    trigger: true
+  - task: build-web-container
+    file: resource-personal-website/.concourse/tasks/build-web-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_TEST_TAG: georgejose/web:test
+- name: test-web
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal-website
+    passed: [build-web]
+    trigger: true
+  - task: test-web-container
+    file: resource-personal-website/.concourse/tasks/test-web-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_TEST_TAG: georgejose/web:test
+      DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
+- name: deploy-web
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal-website
+    passed: [test-web]
+    trigger: true
+  - task: deploy-web-container
+    file: resource-personal-website/.concourse/tasks/deploy-web-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
+      SSH_HOST: george@138.197.146.211
+      DEPLOY_SSH_KEY: {{deploy-ssh-key}}
+
+resources:
+- name: resource-personal-website
+  type: git
+  source:
+    uri: https://github.com/G2Jose/personal-website.git
+    branch: concourse
