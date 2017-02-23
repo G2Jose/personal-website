@@ -6,4 +6,4 @@ image_resource:
   source: {repository: docker, tag: dind}
 
 run:
-  path: resource-personal_website/.concourse/tasks/load-web-container.sh
+  path: resource-personal-website/.concourse/tasks/load-web-container.sh
