@@ -83,6 +83,11 @@ stop_docker() {
   kill -TERM $pid
   wait $pid
 }
-echo $DOCKER_HUB_EMAIL
 start_docker
-ls
+docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
+docker pull $DOCKER_HUB_TEST_TAG
+docker run $DOCKER_HUB_TEST_TAG npm run test
+docker tag $DOCKER_HUB_TEST_TAG $DOCKER_HUB_DEPLOY_TAG
+# docker build --pull -t $DOCKER_HUB_TEST_TAG --cache-from $DOCKER_HUB_TEST_TAG resource-personal-website/
+docker push $DOCKER_HUB_DEPLOY_TAG
+echo "done deploying docker container"

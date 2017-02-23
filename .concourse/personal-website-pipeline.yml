@@ -12,7 +12,6 @@ jobs:
       DOCKER_HUB_EMAIL: {{docker-hub-email}}
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
-      DOCKER_HUB_IMAGE: {{docker-hub-image-web}}
       DOCKER_HUB_TEST_TAG: georgejose/web:test
 - name: test-web
   public: true
@@ -23,6 +22,22 @@ jobs:
     trigger: true
   - task: test-web-container
     file: resource-personal-website/.concourse/tasks/test-web-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_TEST_TAG: georgejose/web:test
+      DOCKER_HUB_TEST_TAG: georgejose/web:latest
+- name: deploy-web
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal-website
+    passed: [test-web]
+    trigger: true
+  - task: deploy-web-container
+    file: resource-personal-website/.concourse/tasks/deploy-web-container.yml
     privileged: true
 
 resources:
