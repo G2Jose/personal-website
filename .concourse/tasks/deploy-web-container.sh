@@ -90,6 +90,6 @@ echo "$DEPLOY_SSH_KEY" > ssh_key
 cat ssh_key && chmod 400 ssh_key && ssh-add ssh_key
 mkdir -p ~/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-ssh $SSH_HOST "docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD && docker pull $DOCKER_HUB_DEPLOY_TAG && docker run -p 8080:8080 -dt $DOCKER_HUB_DEPLOY_TAG"
+ssh $SSH_HOST "docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD && docker pull $DOCKER_HUB_DEPLOY_TAG && docker run -p 8000:8080 -dt $DOCKER_HUB_DEPLOY_TAG"
 # docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 echo "done deploying docker container"
