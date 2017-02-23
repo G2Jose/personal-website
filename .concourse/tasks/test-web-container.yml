@@ -9,4 +9,4 @@ inputs:
 - name: resource-personal-website
 
 run:
-  path: resource-personal-website/.concourse/tasks/load-web-container.sh
+  path: resource-personal-website/.concourse/tasks/test-web-container.sh
