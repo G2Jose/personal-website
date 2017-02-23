@@ -90,6 +90,8 @@ sleep 2
 docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 docker pull $DOCKER_HUB_TEST_TAG || :
 docker build --pull -t $DOCKER_HUB_TEST_TAG --cache-from $DOCKER_HUB_TEST_TAG resource-personal-website/
+echo "done building $DOCKER_HUB_TEST_TAG"
+
 docker push $DOCKER_HUB_TEST_TAG
-echo "done building docker container"
+echo "done pushing $DOCKER_HUB_TEST_TAG"
 ls
