@@ -83,16 +83,10 @@ stop_docker() {
   kill -TERM $pid
   wait $pid
 }
-echo $DOCKER_HUB_EMAIL
+
 start_docker
-
-echo $DEPLOY_SSH_KEY
-apk add --no-cache openssh-client
-eval $(ssh-agent -s)
-echo "$DEPLOY_SSH_KEY" > ssh_key
-cat ssh_key && chmod 400 ssh_key && ssh-add ssh_key
-
 sleep 2
+
 docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 docker pull $DOCKER_HUB_TEST_TAG || :
 docker build --pull -t $DOCKER_HUB_TEST_TAG --cache-from $DOCKER_HUB_TEST_TAG resource-personal-website/
@@ -100,4 +94,3 @@ echo "done building $DOCKER_HUB_TEST_TAG"
 
 docker push $DOCKER_HUB_TEST_TAG
 echo "done pushing $DOCKER_HUB_TEST_TAG"
-ls

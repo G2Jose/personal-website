@@ -13,7 +13,6 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/web:test
-      DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 - name: test-web
   public: true
   serial: true
