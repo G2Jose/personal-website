@@ -15,4 +15,7 @@ run:
   path: ./resource-personal-website/.concourse/tasks/build-web-container.sh
 
 params:
-  ENV_VAR: "Hello"
+  DOCKER_HUB_EMAIL: {{docker-hub-email}}
+  DOCKER_HUB_USERNAME: {{docker-hub-username}}
+  DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+  DOCKER_HUB_IMAGE: georgejose/web
