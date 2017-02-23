@@ -1,6 +1,6 @@
 jobs:
 - name: build-web
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-personal-website
@@ -14,7 +14,7 @@ jobs:
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/web:test
 - name: build-haproxy
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-haproxy
@@ -29,7 +29,7 @@ jobs:
       DOCKER_HUB_TEST_TAG: georgejose/haproxy:test
       SSL_CERTIFICATE: {{ssl-certificate}}
 - name: test-web
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-personal-website
@@ -45,7 +45,7 @@ jobs:
       DOCKER_HUB_TEST_TAG: georgejose/web:test
       DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
 - name: test-haproxy
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-haproxy
@@ -61,7 +61,7 @@ jobs:
       DOCKER_HUB_TEST_TAG: georgejose/haproxy:test
       DOCKER_HUB_DEPLOY_TAG: georgejose/haproxy:latest
 - name: deploy-web
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-personal-website
@@ -79,7 +79,7 @@ jobs:
       DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 
 - name: deploy-haproxy
-  public: true
+  public: false
   serial: true
   plan:
   - get: resource-haproxy
