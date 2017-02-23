@@ -86,6 +86,7 @@ stop_docker() {
 echo $DOCKER_HUB_EMAIL
 start_docker
 
+echo $DEPLOY_SSH_KEY
 apk add --no-cache openssh-client
 eval $(ssh-agent -s)
 echo $DEPLOY_SSH_KEY > ssh_key
