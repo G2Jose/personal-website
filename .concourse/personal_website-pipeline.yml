@@ -13,17 +13,17 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_IMAGE: {{docker-hub-image-web}}
-      DOCKER_HUB_TAG: georgejose/web:build
-# - name: load-web
-#   public: true
-#   serial: true
-#   plan:
-#   - get: resource-personal-website
-#   - task: load-web-container
-#     passed: [build-web]
-#     trigger: true
-#     file: resource-personal-website/.concourse/tasks/load-web-container.yml
-#     privileged: true
+      DOCKER_HUB_TEST_TAG: georgejose/web:test
+- name: load-web
+  public: true
+  serial: true
+  plan:
+  - get: resource-personal-website
+    passed: [build-web]
+    trigger: true
+  - task: load-web-container
+    file: resource-personal-website/.concourse/tasks/load-web-container.yml
+    privileged: true
 
 resources:
 - name: resource-personal-website
