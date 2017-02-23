@@ -28,7 +28,7 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/web:test
-      DOCKER_HUB_TEST_TAG: georgejose/web:latest
+      DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
 - name: deploy-web
   public: true
   serial: true
