@@ -6,10 +6,10 @@ image_resource:
   source: {repository: docker, tag: dind}
 
 inputs:
-- name: resource-personal_website
+- name: resource-personal-website
 
 outputs:
 - name: web-docker-image
 
 run:
-  path: ./resource-personal_website/.concourse/tasks/build-web-container.sh
+  path: ./resource-personal-website/.concourse/tasks/build-web-container.sh
