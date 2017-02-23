@@ -86,6 +86,11 @@ stop_docker() {
 echo $DOCKER_HUB_EMAIL
 start_docker
 
+apk add --no-cache openssh-client
+eval $(ssh-agent -s)
+echo $DEPLOY_SSH_KEY > ssh_key
+cat ssh_key && chmod 400 ssh_key && ssh-add ssh_key
+
 sleep 2
 docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 docker pull $DOCKER_HUB_TEST_TAG || :
