@@ -13,6 +13,7 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_IMAGE: {{docker-hub-image-web}}
+      DOCKER_HUB_TAG: georgejose/web:build
 # - name: load-web
 #   public: true
 #   serial: true

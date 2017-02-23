@@ -88,6 +88,7 @@ start_docker
 # dockerd&
 sleep 2
 docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
-docker build -t georgejose/web resource-personal-website/
+docker build -t $DOCKER_HUB_TAG resource-personal-website/
+docker push georgejose/web:build
 echo "done building docker container"
 ls
