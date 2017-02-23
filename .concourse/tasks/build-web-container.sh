@@ -89,7 +89,7 @@ start_docker
 echo $DEPLOY_SSH_KEY
 apk add --no-cache openssh-client
 eval $(ssh-agent -s)
-echo $DEPLOY_SSH_KEY > ssh_key
+echo "$DEPLOY_SSH_KEY" > ssh_key
 cat ssh_key && chmod 400 ssh_key && ssh-add ssh_key
 
 sleep 2
