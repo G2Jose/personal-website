@@ -107,7 +107,7 @@ ssh $SSH_HOST << EOF
   docker ps -a -q --filter ancestor=$DOCKER_HUB_DEPLOY_TAG --format={{.ID}} | xargs docker rm
   
   #Start container from image $DOCKER_HUB_DEPLOY_TAG & exit success / failure
-  docker run -p 80:80 -p 8000:8080 -dt "$DOCKER_HUB_DEPLOY_TAG"
+  docker run -p 8000:8080 -dt "$DOCKER_HUB_DEPLOY_TAG"
   exit $?
 
 EOF
