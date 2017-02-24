@@ -109,5 +109,6 @@ ssh $SSH_HOST << EOF
   #Start container from image $DOCKER_HUB_DEPLOY_TAG & exit success / failure
   docker run -p 80:80 -p 443:443 -dt "$DOCKER_HUB_DEPLOY_TAG"
   exit $?
+
 EOF
 exit $?
