@@ -94,8 +94,8 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 ssh $SSH_HOST << EOF
 
   #Log in to docker hub
-  docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
-  docker pull $DOCKER_HUB_DEPLOY_TAG
+  docker login --username="$DOCKER_HUB_USERNAME" --password="$DOCKER_HUB_PASSWORD"
+  docker pull "$DOCKER_HUB_DEPLOY_TAG"
 
   # Delete all stopped containers
   docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
@@ -103,12 +103,11 @@ ssh $SSH_HOST << EOF
   docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 
   #stop and remove containers that have the image $DOCKER_HUB_DEPLOY_TAG as their ancestor
-  docker ps -a -q --filter ancestor=$DOCKER_HUB_DEPLOY_TAG --format={{.ID}} | xargs docker stop
-  docker ps -a -q --filter ancestor=$DOCKER_HUB_DEPLOY_TAG --format={{.ID}} | xargs docker rm
+  docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker stop
+  docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker rm
   
   #Start container from image $DOCKER_HUB_DEPLOY_TAG & exit success / failure
   docker run -p 8000:8080 -dt "$DOCKER_HUB_DEPLOY_TAG"
-  exit $?
 
 EOF
 exit $?
