@@ -110,7 +110,7 @@ ssh $SSH_HOST << EOF
   docker rm "$DOCKER_HUB_DEPLOY_NAME"
 
   #Start container from image $DOCKER_HUB_DEPLOY_TAG & exit success / failure
-  docker run -p 8000:8080 -d --name "$DOCKER_HUB_DEPLOY_NAME" "$DOCKER_HUB_DEPLOY_TAG"
+  docker run -p 8000:8080 -d --restart always --name "$DOCKER_HUB_DEPLOY_NAME" "$DOCKER_HUB_DEPLOY_TAG"
 
 EOF
 exit $?
