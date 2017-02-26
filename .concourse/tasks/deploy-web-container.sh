@@ -103,11 +103,14 @@ ssh $SSH_HOST << EOF
   docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 
   #stop and remove containers that have the image $DOCKER_HUB_DEPLOY_TAG as their ancestor
-  docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker stop
-  docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker rm
+  # docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker stop
+  # docker ps -a -q --filter ancestor="$DOCKER_HUB_DEPLOY_TAG" --format={{.ID}} | xargs docker rm
   
+  docker stop "$DOCKER_HUB_DEPLOY_NAME"
+  docker rm "$DOCKER_HUB_DEPLOY_NAME"
+
   #Start container from image $DOCKER_HUB_DEPLOY_TAG & exit success / failure
-  docker run -p 8000:8080 -dt "$DOCKER_HUB_DEPLOY_TAG"
+  docker run -p 8000:8080 -d --name "$DOCKER_HUB_DEPLOY_NAME" "$DOCKER_HUB_DEPLOY_TAG"
 
 EOF
 exit $?

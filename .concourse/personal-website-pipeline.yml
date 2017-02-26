@@ -75,6 +75,7 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_DEPLOY_TAG: georgejose/web:latest
+      DOCKER_HUB_DEPLOY_NAME: web
       SSH_HOST: concourse@georgejose.com
       DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 
@@ -93,6 +94,7 @@ jobs:
       DOCKER_HUB_USERNAME: {{docker-hub-username}}
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_DEPLOY_TAG: georgejose/haproxy:latest
+      DOCKER_HUB_DEPLOY_NAME: web
       SSH_HOST: concourse@georgejose.com
       DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 
