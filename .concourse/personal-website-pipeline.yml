@@ -28,6 +28,7 @@ jobs:
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/haproxy:test
       SSL_CERTIFICATE: {{ssl-certificate}}
+      SSL_CERTIFICATE_PYTHON: {{ssl-certificate-python}}
 - name: build-jupyter
   public: true
   serial: true
