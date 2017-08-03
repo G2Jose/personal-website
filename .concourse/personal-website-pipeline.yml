@@ -28,6 +28,21 @@ jobs:
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/haproxy:test
       SSL_CERTIFICATE: {{ssl-certificate}}
+      SSL_CERTIFICATE_PYTHON: {{ssl-certificate-python}}
+- name: build-jupyter
+  public: true
+  serial: true
+  plan:
+  - get: resource-jupyter
+    trigger: true
+  - task: build-web-container
+    file: resource-jupyter/.concourse/tasks/build-jupyter-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_TEST_TAG: georgejose/jupyter:test
 - name: test-web
   public: true
   serial: true
@@ -60,6 +75,22 @@ jobs:
       DOCKER_HUB_PASSWORD: {{docker-hub-password}}
       DOCKER_HUB_TEST_TAG: georgejose/haproxy:test
       DOCKER_HUB_DEPLOY_TAG: georgejose/haproxy:latest
+- name: test-jupyter
+  public: true
+  serial: true
+  plan:
+  - get: resource-jupyter
+    passed: [build-jupyter]
+    trigger: true
+  - task: test-jupyter-container
+    file: resource-jupyter/.concourse/tasks/test-jupyter-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_TEST_TAG: georgejose/jupyter:test
+      DOCKER_HUB_DEPLOY_TAG: georgejose/jupyter:latest
 - name: deploy-web
   public: true
   serial: true
@@ -97,7 +128,24 @@ jobs:
       DOCKER_HUB_DEPLOY_NAME: haproxy
       SSH_HOST: concourse@georgejose.com
       DEPLOY_SSH_KEY: {{deploy-ssh-key}}
-
+- name: deploy-jupyter
+  public: true
+  serial: true
+  plan:
+  - get: resource-jupyter
+    passed: [test-jupyter]
+    trigger: true
+  - task: deploy-jupyter-container
+    file: resource-jupyter/.concourse/tasks/deploy-jupyter-container.yml
+    privileged: true
+    params:
+      DOCKER_HUB_EMAIL: {{docker-hub-email}}
+      DOCKER_HUB_USERNAME: {{docker-hub-username}}
+      DOCKER_HUB_PASSWORD: {{docker-hub-password}}
+      DOCKER_HUB_DEPLOY_TAG: georgejose/jupyter:latest
+      DOCKER_HUB_DEPLOY_NAME: jupyter
+      SSH_HOST: concourse@georgejose.com
+      DEPLOY_SSH_KEY: {{deploy-ssh-key}}
 resources:
 - name: resource-personal-website
   type: git
@@ -108,4 +156,9 @@ resources:
   type: git
   source:
     uri: https://github.com/G2Jose/haproxy.git
+    branch: master
+- name: resource-jupyter
+  type: git
+  source:
+    uri: https://github.com/G2Jose/jupyter.git
     branch: master

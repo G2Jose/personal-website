@@ -8,3 +8,4 @@
 haproxy/ssl
 haproxy/ssl_decrypted.zip
 jupyter/notebooks
+.vscode
