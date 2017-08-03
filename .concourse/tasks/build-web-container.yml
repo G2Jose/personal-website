@@ -3,7 +3,7 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: {repository: docker, tag: dind, privileged: true}
+  source: {repository: docker, tag: stable-dind, privileged: true}
 
 inputs:
 - name: resource-personal-website
