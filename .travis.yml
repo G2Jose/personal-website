@@ -2,11 +2,17 @@ before_install:
   - git clone https://github.com/G2Jose/wheres-my-ttc.git
 
 install:
-  - ls && cd wheres-my-ttc && npm install
-  - cd .. && ls
-  - npm install
+  - cd wheres-my-ttc
+  - yarn
+  - cd ..
+  - yarn
 
 script:
-  - ls && cd wheres-my-ttc && CI="" npm run build
+  - cd wheres-my-ttc
+  - CI="" npm run build
   - rm -rf ../public/projects/livetransit/*
   - mv build/* ../public/projects/livetransit/
+  - cd ..
+
+deploy:
+  - firebase deploy
