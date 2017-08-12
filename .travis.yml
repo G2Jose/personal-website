@@ -8,4 +8,5 @@ install:
 
 script:
   - ls && cd wheres-my-ttc && CI="" npm run build
-  - mv build/* ../public/projects/livetransit/*
+  - rm -rf ../public/projects/livetransit/*
+  - mv build/* ../public/projects/livetransit/
