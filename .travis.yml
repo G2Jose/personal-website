@@ -1,0 +1,11 @@
+before_install:
+  - git clone git@github.com:G2Jose/wheres-my-ttc.git
+
+install:
+  - ls && cd wheres-my-ttc.git && npm install
+  - cd .. && ls
+  - npm install
+
+script:
+  - ls && cd wheres-my-ttc && npm run build
+  - mv build/* ../public/projects/livetransit/*
