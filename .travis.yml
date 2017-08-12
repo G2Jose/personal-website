@@ -2,7 +2,7 @@ before_install:
   - git clone https://github.com/G2Jose/wheres-my-ttc.git
 
 install:
-  - ls && cd wheres-my-ttc.git && npm install
+  - ls && cd wheres-my-ttc && npm install
   - cd .. && ls
   - npm install
 
