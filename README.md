@@ -1,6 +1,6 @@
 # [http://georgejose.com](https://georgejose.com)
 
-[![build status](http://ci.georgejose.com/api/v1/teams/main/pipelines/pipeline/jobs/deploy-web/badge)](http://ci.georgejose.com/)
+[![Build Status](https://travis-ci.org/G2Jose/personal-website.svg?branch=master)](https://travis-ci.org/G2Jose/personal-website)
 
 Source code for my personal website at www.georgejose.com. Please remove all private information if you wish to fork this. 
 
