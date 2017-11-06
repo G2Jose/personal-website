@@ -1,0 +1,10 @@
+Hi! 
+
+I'm a Senior Consultant at Deloitte Digital with extensive experience working in and leading technical teams. 
+
+My areas of expertise include designing and building scalable technical solutions with various components, Frontend & Backend development - ES6+ (React, React Native, Redux, RxJS, Node), Java (Spring / Springboot), and DevOps (Docker, Concourse, TravisCI). I'm very passionate about technology and love building things. I've also worked on personal projects in React Native and also dabble in the machine learning space.
+
+Given my skills and experience, I think I'd be a great fit for ___. 
+
+Cheers,
+George Jose
